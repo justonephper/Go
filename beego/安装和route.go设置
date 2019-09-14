@@ -1,0 +1,29 @@
+１.安装就按照官方文档操作就可以
+
+2.使用bee工具生成上层应用，在beego框架的基础之上进行建设。现在使用github.com文件夹下的类库感觉有点类似laravle框架下vendor目录，都是通过底层框架上继续
+抽象，将变动大的地方使用controller,model抽象出来，使开发者只关心应用层的事情，这一点做的很好。
+　bee --help
+  bee version
+  bee new blog
+  bee api api.daily.com
+  bee generate controller LoginCOntroller
+  bee generate model User -fields="id:int,name:string,pwd:string"
+  
+3.路由配置
+　routes/route.go配置文件
+ 
+  //路由配置
+  Beego.Router("/"，＆controllers.MainController{})
+  这种情况，按照请求的方式分别对应到Ｇet,Post,Put,Delete,Update等方法
+  
+  //路由配置，指定请求方法名称
+  Ｂeego.Router("/login",&controllers.MainController{},"get,post:Login")
+  这种情况，按照请求路由配置，指定了控制器下的指定方法名，并且可以指定请求方式
+  
+  //路由请求，参数指定
+  Ｂeego.Router("/NewsDetails/:id",&controllers.NewsController, "get:Details")
+  这时，接受参数方式是：
+  id := this.Ctx.Input.Param("id")
+  
+  //路由请求，接受参数
+  id := this.GetString("id")
