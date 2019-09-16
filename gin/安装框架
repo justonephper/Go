@@ -1,0 +1,12 @@
+１.所搜　看云　gin 手册
+
+  所有的操作的操作均在gopath下操作
+  
+  1.1 安装好go工具，设置好gopath目录，然后在gopath目录下操作
+  1.2 安装govendor工具
+    go get -u github.com/kardianos/govendor
+    打开　$gopath/,ls发现自动创建src,bin文件夹，将bin文件夹下的govendor移动到/usr/local/sbin/下，可以直接使用
+    govendor --version
+  1.3安装gin框架
+  go get -u github.com/gin-gonic/gin
+  不出意外会出现timeout,发现说golang.org/x/sys/unix不存在，直接在guthub上搜索
