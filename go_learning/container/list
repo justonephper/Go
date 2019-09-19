@@ -26,3 +26,7 @@ import "container/list"
   for e := l1.Front() ; e != nil ; e = e.Next() {
     fmt.Println(e.Value)
   }
+  
+2.4 初始化和获取链表长度
+  l1.Len()    //获取链表长度
+  l1.Init()   //初始化链表
