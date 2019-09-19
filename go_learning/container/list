@@ -1,0 +1,28 @@
+1.使用list链表，双向链表
+
+先决条件：
+import "container/list"
+
+1.1 定义双向链表(3种)：
+  l1 := list.New()      //定义list链表
+  l1.PushBack("name")   //尾部追加
+  
+  l2 := &list.List{}     //初始化一个链表
+  l2.PushBack("age")
+  
+  l3 := new(list.List)   //和第二种类似
+  l3.PushBack("pwd")
+  
+2.2 取值
+  first := l1.Front()         //获取链表第一个元素的指针
+  first_value := first.Value  //获取*Element的值
+  
+2.3 遍历
+
+  for i:=1 ; i < 5 ; i++ {
+    l1.PushBack(i)
+  }
+  
+  for e := l1.Front() ; e != nil ; e = e.Next() {
+    fmt.Println(e.Value)
+  }
