@@ -1,0 +1,56 @@
+1.简介：
+    import "container/heap"
+
+    heap包提供了对任意类型（实现了heap.Interface接口）的堆操作。（最小）堆是具有“每个节点都是以其为根的子树中最小值”属性的树。
+
+    树的最小元素为其根元素，索引0的位置。
+
+    heap是常用的实现优先队列的方法。要创建一个优先队列，实现一个具有使用（负的）优先级作为比较的依据的Less方法的Heap接口，如此一来可用Push添加项目 
+而用Pop取出队列最高优先级的项目。
+    
+2.使用方式
+
+    type Interface interface {
+        sort.Interface
+        Push(x interface{}) // 向末尾添加元素
+        Pop() interface{}   // 从末尾删除元素
+    }
+    
+    任何实现了本接口的类型都可以用于构建最小堆。最小堆可以通过heap.Init建立，数据是递增顺序或者空的话也是最小堆。
+    注意接口的Push和Pop方法是供heap包调用的，请使用heap.Push和heap.Pop来向一个堆添加或者删除元素
+    
+3.使用代码：
+    type IntHeap []int  // 定义一个类型
+
+    //实现接口的5个方法
+    func (h IntHeap) Len() int { return len(h) }  // 绑定len方法,返回长度
+    func (h IntHeap) Less(i, j int) bool {  // 绑定less方法
+        return h[i] < h[j]  // 如果h[i]<h[j]生成的就是小根堆，如果h[i]>h[j]生成的就是大根堆
+    }
+    func (h IntHeap) Swap(i, j int) {  // 绑定swap方法，交换两个元素位置
+        h[i], h[j] = h[j], h[i]
+    }
+
+    func (h *IntHeap) Pop() interface{} {  // 绑定pop方法，从最后拿出一个元素并返回
+        old := *h
+        n := len(old)
+        x := old[n-1]
+        *h = old[0 : n-1]
+        return x
+    }
+
+    func (h *IntHeap) Push(x interface{}) {  // 绑定push方法，插入新元素
+        *h = append(*h, x.(int))
+    }
+    
+    //使用
+    func TestHeap(t *testing.T) {
+	    h := &IntHeap{2, 1, 5, 6, 4, 3, 7, 9, 8, 0}		//创建slice
+        heap.Init(h)                                    //对堆进行初始化
+        fmt.Println(*h)
+        for len(*h) > 0 {
+            fmt.Printf("%d ", heap.Pop(h))
+        }
+    }
+    
+
