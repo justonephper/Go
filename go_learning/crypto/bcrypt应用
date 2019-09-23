@@ -1,0 +1,41 @@
+1.php和go项目对接的话，用户登录使用的密码验证和密码生成规则必须一致，所以怎样实现php中的password_verify和password_hash呢？
+
+package crypto
+
+import (
+	"fmt"
+	"golang.org/x/crypto/bcrypt"
+	"testing"
+)
+
+func Hash(password string) (string,error)  {
+	hash,err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	return string(hash),err
+}
+
+func checkHash(password, hash string) bool  {
+	err := bcrypt.CompareHashAndPassword([]byte(hash),[]byte(password))
+	return  err == nil
+}
+
+func TestCrypto(t *testing.T)  {
+	password := "123456"
+	hash,_ := Hash(password)
+
+	fmt.Println("密码："+password)
+	fmt.Println("hash:"+hash)
+
+	checkRes := checkHash(password,hash)
+	fmt.Println("检测结果：",checkRes)
+}
+
+
+
+//output
+=== RUN   TestCrypto
+密码：123456
+hash:$2a$10$ujy1HwE/wjOO4ZI/HLP/r.29LPZ269b8GCmtYYHhhoCmVzRwpzy/W
+检测结果： true
+--- PASS: TestCrypto (0.16s)
+PASS
+ok      command-line-arguments  0.166s
