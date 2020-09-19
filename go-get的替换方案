@@ -3,3 +3,5 @@
 2.在github.com上寻找工具包源码，所搜，golang/tools即可，创建golang.org/x/,将对应的代码包clone下来
 
 3.安装包的网址  https://github.com/golang
+
+4.此方法已经废弃，现在使用go mod，开启 GO111MODULE=on,GOPROXY=https://goproxy.cn,direct,速度异常快
