@@ -11,3 +11,8 @@
 2.使用mod模块：
   go mod init api.fitness.com   
   生成go.mod文件
+
+3.测试一下：
+go get -u github.com/gin-gonic/gin
+
+速度特别快，点赞
