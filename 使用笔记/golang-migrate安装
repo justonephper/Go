@@ -1,0 +1,26 @@
+1.使用迁移文件管理项目数据表结构：golang-migrate
+
+1.1前置知识，migrate官方提供了两种接入形式，一种源码，一种命令行工具，其实内在执行机制是一样的
+
+打算使用命令行形式，
+  思路1：下载migrate源码包，然后进行编译，生成命令工具
+  思路2：直接下载可执行文件
+    
+  思路1：实现过程：
+  1.执行go get -u github.com/golang-migrate/migrate/cmd/migrate
+  2.路径：
+  $GOPATH/pkg/mod/github.com/golang-migrate/migrate@v3.5.4+incompatible/cli
+  查看main.go文件，直接编译 go build
+  3.编译失败，发现找不到import进来的包
+  4.解决方案：创建go mod，执行安装操作，指令：
+      go mod init migrate(模块名);go mod tidy;go build;
+  5.执行完成后，在GOPATH/bin目录下出现migrate指令
+  执行 migrate指令，出现了相关的帮助文档
+  
+  思路2：实现过程：
+  直接在官网下载windows版本的二进制文件，能直接运行，相当于就是官方已经编译好了，咱们直接拿过来用就好了，和思路一编译结果处理指令名字不一样，其他都一样
+  下载链接：https://github.com/golang-migrate/migrate/releases/download/v4.13.0/migrate.windows-amd64.exe.tar.gz
+  
+  下载，解压，直接使用就好
+  
+  
