@@ -18,15 +18,16 @@
 3.测试一下：
  ```
   go get -u github.com/gin-gonic/gin
+  速度特别快，点赞
  ```
 
-速度特别快，点赞
-
-4.执行一下dity,检查一下依赖，把没用的代码包删除，下载需要的代码包
-
+4.执行一下dity
+```
+  检查一下依赖，把没用的代码包删除，下载需要的代码包
+```
 
 Q1:下载工具包，提示
-指令go get -u github.com/Unknow/com
+  指令go get -u github.com/Unknow/com
 
 提示：
 go get: github.com/Unknwon/com@v1.0.1: parsing go.mod:
