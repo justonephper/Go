@@ -26,15 +26,12 @@
   检查一下依赖，把没用的代码包删除，下载需要的代码包
 ```
 
-Q1:下载工具包，提示
-  指令go get -u github.com/Unknow/com
+Q1:下载工具包，使用指令 go get -u github.com/Unknow/com
 
-提示：
-go get: github.com/Unknwon/com@v1.0.1: parsing go.mod:
-        module declares its path as: github.com/unknwon/com
-                but was required as: github.com/Unknwon/com
-  解决方案：
+结果提示：
+go get: github.com/Unknwon/com@v1.0.1: parsing go.mod:module declares its path as: github.com/unknwon/com but was required as: github.com/Unknwon/com
   ```
+  解决方案：
   1.1 查资料得知，使用go-mod 引入某个包出错例,需要在go.mod文件做处理
   
   1.2 格式为:
