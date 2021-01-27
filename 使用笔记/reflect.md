@@ -9,113 +9,103 @@
     reflect.TypeOf(x)返回float64，reflect.ValueOf(x)返回3.4
     
 ### 3.1 获取类型信息和值信息
-  
-        ```
-              type := reflect.TypeOf(num)
-              value := reflect.ValueOf(num)
-        ```
+       type := reflect.TypeOf(num)
+       value := reflect.ValueOf(num)
   
 ### 3.2 类型信息操作
-  
-        ```
-              typeOf := relfect.TypeOf(num)
 
-              //kind信息
-              typeOf.Kind()
+      typeOf := relfect.TypeOf(num)
 
-              //变量名称
-              name := typeOf.Name()
+      //kind信息
+      typeOf.Kind()
 
-              //数据是结构体时，查询字段数量
-              for i := 0; i < typeOf.NumField(); i++ {}
-     
-        ```
+      //变量名称
+      name := typeOf.Name()
+
+      //数据是结构体时，查询字段数量
+      for i := 0; i < typeOf.NumField(); i++ {}
   
   ### 3.3 值信息操作
-        ```
-                valueOf := reflect.ValueOf(num)
+  
+      valueOf := reflect.ValueOf(num)
                 
-                //查询kind信息
-                valueOf.Type().Kind()           // valueOf.Type() == typeOf
-                typeOf.Kind() == valueOf.Kind()
+      //查询kind信息
+      valueOf.Type().Kind()           // valueOf.Type() == typeOf
+      typeOf.Kind() == valueOf.Kind()
                 
-                //接口原值=》接口值
-                valueOf.interface()   
-        ```
+      //接口原值=》接口值
+      valueOf.interface()   
         
 ### 3.4 反射获取结构的方法
-        ```
-                type Student struct {
-                    Name string
-                    Age  int
-                }
+
+	type Student struct {
+	    Name string
+	    Age  int
+	}
+
+	func (stu *Student)SetName(name string) bool {
+	    stu.Name = name
+	    return true
+	}
                 
-                func (stu *Student)SetName(name string) bool {
-                    stu.Name = name
-                    return true
-                }
-                
-                func TestReflect(t *testing.T){
-                    var stu Student {
-                        "haoge",
-                        25,
-                    }
-                    valueOf := reflect.ValueOf(&stu)
-                    
-                    //第一种，访问下标的方式
-                    valueOf.Method(0).Call(nil)
-                    
-                    //第二种，指定方法名的方式
-                    valueOf.MethodByName("SetName").Call(nil)
-                }
-        ```
+	func TestReflect(t *testing.T){
+	    var stu Student {
+		"haoge",
+		25,
+	    }
+	    valueOf := reflect.ValueOf(&stu)
+
+	    //第一种，访问下标的方式
+	    valueOf.Method(0).Call(nil)
+
+	    //第二种，指定方法名的方式
+	    valueOf.MethodByName("SetName").Call(nil)
+	}
         
 ### 3.5 遍历结构体
-        ```
-                type Student struct {
-                    Name        string
-                    Age         int
-                    Score       string
-                    Address     string
-                }
-                
-                func TestReflect(t *testing>T) {
-                    stu := Student {
-                        "haoge",
-                        23,
-                        100,
-                        "beijingshi",
-                    }
-                    
-                    valueOf := reflect.ValueOf(stu)
-                    typeOf := reflect.TypeOf(stu)
-                    
-                    name := typeOf.Name()
-                    name = strings.ToLower(name)
-                    
-                    query := fmt.Speinrf("insert into %s (\"name\",\"age\",\"score\",\"address\") values(",name)
-                    
-                    for i:=0;i<valueOf.NumField();i++ {
-                        val := valueOf.Field(i)
-                        if i == 0 {
-                            switch v.Type().Kind() {
-                                case reflect.Int:
-                                    query = fmt.Sprintf("%s%v", query, val)
-                                case reflect.String:
-                                    query = fmt.Sprintf("%s\"%v\"", query, val)
-                            }
-                        } else {
-                            switch val.Type().Kind() {
-			        case reflect.Int:
-				    query = fmt.Sprintf("%s,%v", query, val)
-			        case reflect.String:
-				    query = fmt.Sprintf("%s,\"%v\"", query, val)
-			    }
-                        }
-                    }
-                    
-                    query = fmt.Sprintf("%s);", query)
-	            t.Log(query)
-                }
-        ```
-  
+
+	type Student struct {
+	    Name        string
+	    Age         int
+	    Score       string
+	    Address     string
+	}
+
+	func TestReflect(t *testing>T) {
+	    stu := Student {
+		"haoge",
+		23,
+		100,
+		"beijingshi",
+	    }
+
+	    valueOf := reflect.ValueOf(stu)
+	    typeOf := reflect.TypeOf(stu)
+
+	    name := typeOf.Name()
+	    name = strings.ToLower(name)
+
+	    query := fmt.Speinrf("insert into %s (\"name\",\"age\",\"score\",\"address\") values(",name)
+
+	    for i:=0;i<valueOf.NumField();i++ {
+		val := valueOf.Field(i)
+		if i == 0 {
+		    switch v.Type().Kind() {
+			case reflect.Int:
+			    query = fmt.Sprintf("%s%v", query, val)
+			case reflect.String:
+			    query = fmt.Sprintf("%s\"%v\"", query, val)
+		    }
+		} else {
+		    switch val.Type().Kind() {
+			case reflect.Int:
+			    query = fmt.Sprintf("%s,%v", query, val)
+			case reflect.String:
+			    query = fmt.Sprintf("%s,\"%v\"", query, val)
+		    }
+		}
+	    }
+
+	    query = fmt.Sprintf("%s);", query)
+	    t.Log(query)
+	}
