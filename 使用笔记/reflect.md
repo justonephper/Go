@@ -10,14 +10,62 @@
     
 ### 获取类型信息和值信息
   
-  ```
-      type := reflect.TypeOf(num)
-      value := reflect.ValueOf(num)
-  ```
+        ```
+              type := reflect.TypeOf(num)
+              value := reflect.ValueOf(num)
+        ```
   
 ### 类型信息操作
   
-  ```
-      typeOf := relfect.TypeOf(num)
-      
-  ```
+        ```
+              typeOf := relfect.TypeOf(num)
+
+              //kind信息
+              typeOf.Kind()
+
+              //变量名称
+              name := typeOf.Name()
+
+              //数据是结构体时，查询字段数量
+              for i := 0; i < typeOf.NumField(); i++ {}
+     
+        ```
+  
+  ### 值信息操作
+        ```
+                valueOf := reflect.ValueOf(num)
+                
+                //查询kind信息
+                valueOf.Type().Kind()           // valueOf.Type() == typeOf
+                typeOf.Kind() == valueOf.Kind()
+                
+                //接口原值=》接口值
+                valueOf.interface()   
+        ```
+        
+### 反射获取结构的方法
+        ```
+                type Student struct {
+                    Name string
+                    Age  int
+                }
+                
+                func (stu *Student)SetName(name string) bool {
+                    stu.Name = name
+                    return true
+                }
+                
+                func TestReflect(t *testing.T){
+                    var stu Student {
+                        "haoge",
+                        25,
+                    }
+                    valueOf := reflect.ValueOf(&stu)
+                    
+                    //第一种，访问下标的方式
+                    valueOf.Method(0).Call(nil)
+                    
+                    //第二种，指定方法名的方式
+                    valueOf.MethodByName("SetName").Call(nil)
+                }
+        ```
