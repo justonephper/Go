@@ -8,7 +8,7 @@
 
 ```
     
-    举例：
+    举例1：
     
     添加博客参数
     type BlogAddParams struct {
@@ -20,6 +20,23 @@
     知识点：
       1. json可以给参数取别名
       2. binding语法，支持参数校验，binding后面多个值之间使用逗号 ","
+      
+      
+   举例2：
+   
+   列表接口参数
+   // Paging common input parameter structure
+    type PageInfo struct {
+        Page     int    `json:"page" form:"page" binding:"required"`
+        PageSize int    `json:"page_size" form:"page_size" binding:"required"`
+        Q        string `json:"q" form:"q"`
+        OrderKey string `json:"order_key" form:"order_key"`
+        Desc     bool   `json:"desc" form:"desc"`
+    }
+    
+    知识点：
+        1. page,page_size,q,order,desc等字段是通过url形式传输（xxx.com?page=1&page_size=6&q=健康&order_key=created_at&desc=true）
+        2. 结构体中，需要声明form的tag才能解析上述参数
   
 ```
 
