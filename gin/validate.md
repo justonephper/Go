@@ -2,8 +2,11 @@
 
 
 ## 校验请求参数
+
+>gin框架使用github.com/go-playground/validator进行参数校验，目前已经支持<github.com/go-playground/validator/v10>了，我们需要在定义结构体时使用 binding tag标识相关校验规则，
+可以查看[validator文档](https://pkg.go.dev/github.com/go-playground/validator#hdr-Baked_In_Validators_and_Tags)查看支持的所有 tag。
+
 ```
-    [validator链接](https://pkg.go.dev/github.com/go-playground/validator#hdr-Baked_In_Validators_and_Tags)
     
     举例：
     
