@@ -24,6 +24,8 @@
 ```
 
 ## 模型数据结构
+
+> [gorm文档地址](https://gorm.io/zh_CN/docs/)
 ```
     举例：
     
