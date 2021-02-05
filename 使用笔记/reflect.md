@@ -84,8 +84,8 @@
 
 	    name := typeOf.Name()
 	    name = strings.ToLower(name)
-
-	    query := fmt.Speinrf("insert into %s (\"name\",\"age\",\"score\",\"address\") values(",name)
+			 
+	    query := fmt.Sprintf("insert into %s (\"name\",\"age\",\"score\",\"address\") values(",name)
 
 	    for i:=0;i<valueOf.NumField();i++ {
 		val := valueOf.Field(i)
