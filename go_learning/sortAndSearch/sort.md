@@ -35,7 +35,7 @@ func insertSort(arr []int) {
 	for i := 1; i < length; i++ {
 		preIndex := i - 1
 		current := arr[i]
-		for preIndex >= 0 && arr[preIndex] > current {
+		for preIndex >= 0 && current < arr[preIndex] {
 			arr[preIndex+1] = arr[preIndex]
 			preIndex--
 		}
